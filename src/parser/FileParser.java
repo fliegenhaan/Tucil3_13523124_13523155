@@ -20,154 +20,169 @@ public class FileParser {
         BufferedReader dimReader = new BufferedReader(new FileReader(file));
         String dimensionLine = dimReader.readLine();
         String[] dimensions = dimensionLine.split(" ");
-        int width = Integer.parseInt(dimensions[0]);
-        int height = Integer.parseInt(dimensions[1]);
+        int boardWidth = Integer.parseInt(dimensions[0]);
+        int boardHeight = Integer.parseInt(dimensions[1]);
         String countLine = dimReader.readLine();
         int pieceCount = Integer.parseInt(countLine);
         dimReader.close();
         
-        System.out.println("Dimensi board: " + width + "x" + height);
+        System.out.println("Dimensi board: " + boardWidth + "x" + boardHeight);
         System.out.println("Jumlah piece non-primary: " + pieceCount);
         
+        // baca file dengan dimensi diperluas (width+1) x (height+1)
+        int extendedWidth = boardWidth + 1;
+        int extendedHeight = boardHeight + 1;
+        char[][] extendedGrid = new char[extendedHeight][extendedWidth];
+        
+        for (int i = 0; i < extendedHeight; i++) {
+            for (int j = 0; j < extendedWidth; j++) {
+                extendedGrid[i][j] = '.';
+            }
+        }
+        
         BufferedReader reader = new BufferedReader(new FileReader(file));
+        reader.readLine();
+        reader.readLine();
+        
+        List<String> lines = new ArrayList<>();
         String line;
-        int lineCount = 0;
-        boolean foundK = false;
-        int kRow = -1, kCol = -1;
-        Direction exitDirection = null;
-        List<String> gridLines = new ArrayList<>();
-        
-        reader.readLine();
-        reader.readLine();
-        
-        while ((line = reader.readLine()) != null && gridLines.size() < height) {
-            gridLines.add(line);
-            System.out.println("Baris " + lineCount + ": " + line);
-            
-            if (line.length() > width && line.charAt(width) == 'K') {
-                foundK = true;
-                kRow = lineCount;
-                kCol = width;
-                exitDirection = Direction.RIGHT;
-                System.out.println("  K ditemukan di dinding kanan: baris " + lineCount + ", kolom " + width);
-            }
-            
-            for (int i = 0; i < Math.min(line.length(), width); i++) {
-                if (line.charAt(i) == 'K') {
-                    System.out.println("  WARNING: K ditemukan di dalam papan: baris " + lineCount + ", kolom " + i);
-                    System.out.println("  K seharusnya berada di dinding, bukan di dalam papan!");
-                }
-            }
-            
-            lineCount++;
+        while ((line = reader.readLine()) != null) {
+            lines.add(line);
         }
-        
-        if (!foundK && gridLines.size() == height && reader.ready()) {
-            line = reader.readLine();
-            System.out.println("Baris dinding bawah: " + line);
-            
-            for (int i = 0; i < Math.min(line.length(), width); i++) {
-                if (line.charAt(i) == 'K') {
-                    foundK = true;
-                    kRow = height;
-                    kCol = i;
-                    exitDirection = Direction.DOWN;
-                    System.out.println("  K ditemukan di dinding bawah: baris " + height + ", kolom " + i);
-                }
-            }
-        }
-        
         reader.close();
         
-        if (!foundK) {
-            System.out.println("PERINGATAN: K tidak ditemukan di dinding! Mencoba menentukan posisi exit...");
-            
-            boolean foundP = false;
-            Orientation pOrientation = null;
-            int pRow = -1, pCol = -1;
-            
-            for (int i = 0; i < Math.min(gridLines.size(), height); i++) {
-                line = gridLines.get(i);
-                for (int j = 0; j < Math.min(line.length(), width); j++) {
-                    if (line.charAt(j) == 'P') {
-                        if (!foundP) {
-                            pRow = i;
-                            pCol = j;
-                            foundP = true;
-                        } else {
-                            if (i == pRow) {
-                                pOrientation = Orientation.HORIZONTAL;
-                            } else if (j == pCol) {
-                                pOrientation = Orientation.VERTICAL;
-                            }
-                        }
-                    }
-                }
+        for (int i = 0; i < lines.size() && i < extendedHeight; i++) {
+            String currentLine = lines.get(i);
+            for (int j = 0; j < currentLine.length() && j < extendedWidth; j++) {
+                extendedGrid[i][j] = currentLine.charAt(j);
             }
-            
-            if (foundP && pOrientation != null) {
-                if (pOrientation == Orientation.HORIZONTAL) {
-                    kRow = pRow;
-                    kCol = width;
-                    exitDirection = Direction.RIGHT;
-                } else {
-                    kRow = height;
-                    kCol = pCol;
+        }
+        
+        // mencari K di semua posisi dinding
+        Position exitPosition = null;
+        Direction exitDirection = null;
+        int validRowStart = 0, validRowEnd = boardHeight - 1;
+        int validColStart = 0, validColEnd = boardWidth - 1;
+        
+        for (int j = 0; j < extendedWidth; j++) {
+            if (extendedGrid[0][j] == 'K') {
+                exitPosition = new WallPosition(0, j, Direction.UP);
+                exitDirection = Direction.UP;
+                validRowStart = 1;
+                validRowEnd = boardHeight;
+                validColStart = 0;
+                validColEnd = boardWidth - 1;
+                System.out.println("K ditemukan di dinding atas: [0," + j + "]");
+                break;
+            }
+        }
+        
+        if (exitPosition == null) {
+            for (int j = 0; j < extendedWidth; j++) {
+                if (extendedGrid[boardHeight][j] == 'K') {
+                    exitPosition = new WallPosition(boardHeight - 1, j, Direction.DOWN);
                     exitDirection = Direction.DOWN;
+                    validRowStart = 0;
+                    validRowEnd = boardHeight - 1;
+                    validColStart = 0;
+                    validColEnd = boardWidth - 1;
+                    System.out.println("K ditemukan di dinding bawah: [" + boardHeight + "," + j + "]");
+                    break;
                 }
-                System.out.println("Menempatkan K di dinding " + exitDirection + ": [" + kRow + "," + kCol + "]");
+            }
+        }
+        
+        if (exitPosition == null) {
+            for (int i = 0; i < extendedHeight; i++) {
+                if (extendedGrid[i][0] == 'K') {
+                    exitPosition = new WallPosition(i, 0, Direction.LEFT);
+                    exitDirection = Direction.LEFT;
+                    validRowStart = 0;
+                    validRowEnd = boardHeight - 1;
+                    validColStart = 1;
+                    validColEnd = boardWidth;
+                    System.out.println("K ditemukan di dinding kiri: [" + i + ",0]");
+                    break;
+                }
+            }
+        }
+        
+        if (exitPosition == null) {
+            for (int i = 0; i < extendedHeight; i++) {
+                if (extendedGrid[i][boardWidth] == 'K') {
+                    exitPosition = new WallPosition(i, boardWidth - 1, Direction.RIGHT);
+                    exitDirection = Direction.RIGHT;
+                    validRowStart = 0;
+                    validRowEnd = boardHeight - 1;
+                    validColStart = 0;
+                    validColEnd = boardWidth - 1;
+                    System.out.println("K ditemukan di dinding kanan: [" + i + "," + boardWidth + "]");
+                    break;
+                }
+            }
+        }
+        
+        if (exitPosition == null) {
+            throw new IOException("Pintu keluar (K) tidak ditemukan di dinding!");
+        }
+        
+        // ekstrak board yang valid berdasarkan posisi K
+        char[][] validGrid = new char[boardHeight][boardWidth];
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
+                int extendedRow = validRowStart + i;
+                int extendedCol = validColStart + j;
+                validGrid[i][j] = extendedGrid[extendedRow][extendedCol];
+            }
+        }
+        
+        // cari dan analisis primary piece (P)
+        List<Position> primaryPositions = new ArrayList<>();
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
+                if (validGrid[i][j] == 'P') {
+                    primaryPositions.add(new Position(i, j));
+                }
+            }
+        }
+        
+        if (primaryPositions.isEmpty()) {
+            throw new IOException("Primary piece (P) tidak ditemukan!");
+        }
+        
+        Orientation primaryOrientation;
+        if (primaryPositions.size() == 1) {
+            primaryOrientation = Orientation.HORIZONTAL; // asumsi default
+        } else {
+            Position first = primaryPositions.get(0);
+            Position second = primaryPositions.get(1);
+            if (first.getRow() == second.getRow()) {
+                primaryOrientation = Orientation.HORIZONTAL;
             } else {
-                kRow = height - 1;
-                kCol = width;
-                exitDirection = Direction.RIGHT;
-                System.out.println("Fallback: menempatkan K di dinding kanan: [" + kRow + "," + kCol + "]");
+                primaryOrientation = Orientation.VERTICAL;
             }
         }
         
-        char[][] grid = new char[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                grid[i][j] = '.';
-            }
+        boolean isAligned = validateAlignment(primaryPositions, exitPosition, exitDirection, primaryOrientation);
+        if (!isAligned) {
+            throw new IOException("Primary piece tidak sejajar dengan pintu keluar!");
         }
         
-        for (int i = 0; i < Math.min(gridLines.size(), height); i++) {
-            line = gridLines.get(i);
-            for (int j = 0; j < Math.min(line.length(), width); j++) {
-                char cell = line.charAt(j);
-                if (cell != '.' && cell != 'K') {
-                    grid[i][j] = cell;
-                }
-            }
-        }
+        Board board = new Board(boardWidth, boardHeight);
+        board.setExitDirection(exitDirection);
+        board.setExitPosition(exitPosition);
         
         Map<Character, List<Position>> pieces = new HashMap<>();
-        
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                char cell = grid[i][j];
-                if (cell != '.') {
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
+                char cell = validGrid[i][j];
+                if (cell != '.' && cell != 'K') {
                     pieces.putIfAbsent(cell, new ArrayList<>());
                     pieces.get(cell).add(new Position(i, j));
                 }
             }
         }
         
-        Board board = new Board(width, height);
-        board.setExitDirection(exitDirection);
-        
-        Position exitPosition;
-        if (exitDirection == Direction.RIGHT) {
-            exitPosition = new WallPosition(kRow, width - 1, Direction.RIGHT);
-        } else if (exitDirection == Direction.DOWN) {
-            exitPosition = new WallPosition(height - 1, kCol, Direction.DOWN);
-        } else {
-            exitPosition = new WallPosition(height - 1, width - 1, Direction.RIGHT);
-        }
-        
-        board.setExitPosition(exitPosition);
-        System.out.println("Exit diposisikan di dinding " + exitDirection + " dekat sel [" + 
-                          exitPosition.getRow() + "," + exitPosition.getCol() + "]");
         for (Map.Entry<Character, List<Position>> entry : pieces.entrySet()) {
             char id = entry.getKey();
             List<Position> positions = entry.getValue();
@@ -176,38 +191,60 @@ public class FileParser {
             if (positions.size() > 0) {
                 Piece piece = new Piece(id, positions, isPrimary);
                 board.addPiece(piece);
-                System.out.println("Added piece: " + id + " (primary: " + isPrimary + 
+                System.out.println("ditambahkan piece: " + id + " (primary: " + isPrimary + 
                                   ", size: " + positions.size() + 
-                                  ", orientation: " + piece.getOrientation() + ")");
+                                  ", orientasi: " + piece.getOrientation() + ")");
             }
         }
         
-        printBoardState(grid, height, width, exitDirection, kRow, kCol);
+        System.out.println("Board berhasil diparse dengan exit di " + exitDirection);
+        printBoardState(validGrid, boardHeight, boardWidth, exitDirection, exitPosition);
         
         return board;
     }
     
-    private static void printBoardState(char[][] grid, int height, int width, Direction exitDirection, int kRow, int kCol) {
+    private static boolean validateAlignment(List<Position> primaryPositions, Position exitPosition, 
+                                           Direction exitDirection, Orientation primaryOrientation) {
+        if (primaryOrientation == Orientation.HORIZONTAL) {
+            if (exitDirection != Direction.LEFT && exitDirection != Direction.RIGHT) {
+                System.out.println("Primary piece horizontal tetapi exit tidak di kiri/kanan");
+                return false;
+            }
+            
+            int exitRow = exitPosition.getRow();
+            for (Position pos : primaryPositions) {
+                if (pos.getRow() != exitRow) {
+                    System.out.println("Primary piece tidak sejajar dengan exit secara horizontal");
+                    return false;
+                }
+            }
+        } else {
+            if (exitDirection != Direction.UP && exitDirection != Direction.DOWN) {
+                System.out.println("Primary piece vertikal tetapi exit tidak di atas/bawah");
+                return false;
+            }
+            
+            int exitCol = exitPosition.getCol();
+            for (Position pos : primaryPositions) {
+                if (pos.getCol() != exitCol) {
+                    System.out.println("Primary piece tidak sejajar dengan exit secara vertikal");
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    private static void printBoardState(char[][] grid, int height, int width, 
+                                      Direction exitDirection, Position exitPosition) {
         System.out.println("\nBoard state setelah parsing:");
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 System.out.print(grid[i][j]);
             }
-            if (exitDirection == Direction.RIGHT && kRow == i) {
-                System.out.print("K");
-            }
             System.out.println();
         }
-        
-        if (exitDirection == Direction.DOWN) {
-            for (int j = 0; j < width; j++) {
-                if (j == kCol) {
-                    System.out.print("K");
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
+        System.out.println("Exit: " + exitDirection + " di posisi " + exitPosition);
     }
 }
