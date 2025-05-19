@@ -1,14 +1,13 @@
 package parser;
 
-import java.io.*;
-import java.util.*;
-
 import entity.Board;
 import entity.Direction;
 import entity.Orientation;
 import entity.Piece;
 import entity.Position;
 import entity.WallPosition;
+import java.io.*;
+import java.util.*;
 
 public class FileParser {
     public static Board parseFromFile(String filePath) throws IOException {
@@ -17,14 +16,17 @@ public class FileParser {
             throw new IOException("File tidak ditemukan: " + filePath);
         }
         
-        BufferedReader dimReader = new BufferedReader(new FileReader(file));
-        String dimensionLine = dimReader.readLine();
-        String[] dimensions = dimensionLine.split(" ");
-        int boardWidth = Integer.parseInt(dimensions[0]);
-        int boardHeight = Integer.parseInt(dimensions[1]);
-        String countLine = dimReader.readLine();
-        int pieceCount = Integer.parseInt(countLine);
-        dimReader.close();
+        int boardWidth;
+        int boardHeight;
+        int pieceCount;
+        try (BufferedReader dimReader = new BufferedReader(new FileReader(file))) {
+            String dimensionLine = dimReader.readLine();
+            String[] dimensions = dimensionLine.split(" ");
+            boardWidth = Integer.parseInt(dimensions[0]);
+            boardHeight = Integer.parseInt(dimensions[1]);
+            String countLine = dimReader.readLine();
+            pieceCount = Integer.parseInt(countLine);
+        }
         
         System.out.println("Dimensi board: " + boardWidth + "x" + boardHeight);
         System.out.println("Jumlah piece non-primary: " + pieceCount);
@@ -40,16 +42,16 @@ public class FileParser {
             }
         }
         
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        reader.readLine();
-        reader.readLine();
-        
-        List<String> lines = new ArrayList<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            lines.add(line);
+        List<String> lines;
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            reader.readLine();
+            reader.readLine();
+            lines = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
         }
-        reader.close();
         
         for (int i = 0; i < lines.size() && i < extendedHeight; i++) {
             String currentLine = lines.get(i);
@@ -61,17 +63,15 @@ public class FileParser {
         // mencari K di semua posisi dinding
         Position exitPosition = null;
         Direction exitDirection = null;
-        int validRowStart = 0, validRowEnd = boardHeight - 1;
-        int validColStart = 0, validColEnd = boardWidth - 1;
+        int validRowStart = 0;
+        int validColStart = 0;
         
         for (int j = 0; j < extendedWidth; j++) {
             if (extendedGrid[0][j] == 'K') {
                 exitPosition = new WallPosition(0, j, Direction.UP);
                 exitDirection = Direction.UP;
                 validRowStart = 1;
-                validRowEnd = boardHeight;
                 validColStart = 0;
-                validColEnd = boardWidth - 1;
                 System.out.println("K ditemukan di dinding atas: [0," + j + "]");
                 break;
             }
@@ -83,9 +83,7 @@ public class FileParser {
                     exitPosition = new WallPosition(boardHeight - 1, j, Direction.DOWN);
                     exitDirection = Direction.DOWN;
                     validRowStart = 0;
-                    validRowEnd = boardHeight - 1;
                     validColStart = 0;
-                    validColEnd = boardWidth - 1;
                     System.out.println("K ditemukan di dinding bawah: [" + boardHeight + "," + j + "]");
                     break;
                 }
@@ -98,9 +96,7 @@ public class FileParser {
                     exitPosition = new WallPosition(i, 0, Direction.LEFT);
                     exitDirection = Direction.LEFT;
                     validRowStart = 0;
-                    validRowEnd = boardHeight - 1;
                     validColStart = 1;
-                    validColEnd = boardWidth;
                     System.out.println("K ditemukan di dinding kiri: [" + i + ",0]");
                     break;
                 }
@@ -113,9 +109,7 @@ public class FileParser {
                     exitPosition = new WallPosition(i, boardWidth - 1, Direction.RIGHT);
                     exitDirection = Direction.RIGHT;
                     validRowStart = 0;
-                    validRowEnd = boardHeight - 1;
                     validColStart = 0;
-                    validColEnd = boardWidth - 1;
                     System.out.println("K ditemukan di dinding kanan: [" + i + "," + boardWidth + "]");
                     break;
                 }
@@ -188,7 +182,7 @@ public class FileParser {
             List<Position> positions = entry.getValue();
             boolean isPrimary = (id == 'P');
             
-            if (positions.size() > 0) {
+            if (!positions.isEmpty()) {
                 Piece piece = new Piece(id, positions, isPrimary);
                 board.addPiece(piece);
                 System.out.println("ditambahkan piece: " + id + " (primary: " + isPrimary + 

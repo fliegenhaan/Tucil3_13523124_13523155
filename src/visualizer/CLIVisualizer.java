@@ -4,16 +4,15 @@ import entity.Board;
 import entity.Direction;
 import entity.Move;
 import entity.Node;
-import entity.Position;
 
 public class CLIVisualizer {
     private static final String RESET = "\u001B[0m";
     private static final String RED = "\u001B[31m";
     private static final String GREEN = "\u001B[32m";
     private static final String YELLOW = "\u001B[33m";
-    private static final String BLUE = "\u001B[34m";
-    private static final String PURPLE = "\u001B[35m";
-    private static final String CYAN = "\u001B[36m";
+    // private static final String BLUE = "\u001B[34m";
+    // private static final String PURPLE = "\u001B[35m";
+    // private static final String CYAN = "\u001B[36m";
     
     public static void displaySolution(java.util.List<Node> path, Direction exitDirection, int exitRow, int exitCol) {
         if (path == null || path.isEmpty()) {
@@ -34,7 +33,7 @@ public class CLIVisualizer {
     public static void displayBoard(Board board, Move lastMove, Direction exitDirection, int exitRow, int exitCol) {
         char[][] grid = board.getGrid();
         char primaryPieceId = board.getPrimaryPieceId();
-        Position exitPos = board.getExitPosition();
+        // Position exitPos = board.getExitPosition();
         int height = grid.length;
         int width = grid[0].length;
         

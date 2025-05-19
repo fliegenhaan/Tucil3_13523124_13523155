@@ -1,11 +1,10 @@
 package algorithm;
 
-import java.util.*;
-
 import algorithm.heuristics.Heuristic;
 import entity.Board;
 import entity.Move;
 import entity.Node;
+import java.util.*;
 
 public class GreedyBestFirstSearch implements PathFinder {
     private Heuristic heuristic;
@@ -84,5 +83,13 @@ public class GreedyBestFirstSearch implements PathFinder {
     @Override
     public String getAlgorithmName() {
         return "Greedy Best First Search (" + heuristic.getName() + ")";
+    }
+
+    public Heuristic getHeuristic() {
+        return heuristic;
+    }
+
+    public void setHeuristic(Heuristic heuristic) {
+        this.heuristic = heuristic;
     }
 }
