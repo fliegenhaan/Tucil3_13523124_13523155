@@ -22,11 +22,9 @@ public class Main {
             System.out.println("=== Rush Hour Puzzle Solver ===");
             System.out.println("Implementasi UCS, Greedy Best First Search, A*, dan IDA*");
             System.out.println();
-            
             boolean continueProgram = true;
             Board currentBoard = null;
             String currentFilePath = null;
-            
             while (continueProgram) {
                 // jika belum ada board atau user ingin ganti testcase
                 if (currentBoard == null) {
@@ -37,6 +35,7 @@ public class Main {
                             
                             if (filePath.equalsIgnoreCase("exit")) {
                                 System.out.println("Program dihentikan oleh user.");
+                                // JANGAN close scanner di sini!
                                 scanner.close();
                                 return;
                             }
@@ -136,12 +135,6 @@ public class Main {
                                     currentBoard.getExitPosition().getRow(),
                                     currentBoard.getExitPosition().getCol());
                         }
-                        
-                        System.out.print("\nSimpan solusi ke file? (y/n): ");
-                        String save = scanner.nextLine().toLowerCase().trim();
-                        if (save.equals("y") || save.equals("yes")) {
-                            saveSolutionToFile(solution, pathFinder, totalTime);
-                        }
                     }
                     
                     // tanya apakah ingin mengulang program
@@ -150,6 +143,16 @@ public class Main {
                     
                     if (repeat.equals("tidak") || repeat.equals("no") || repeat.equals("n")) {
                         continueProgram = false;
+                        
+                        // tanya simpan solusi hanya ketika user tidak ingin mengulang
+                        if (solution != null) {
+                            System.out.print("Simpan solusi ke file? (y/n): ");
+                            String save = scanner.nextLine().toLowerCase().trim();
+                            if (save.equals("y") || save.equals("yes")) {
+                                saveSolutionToFile(solution, pathFinder, totalTime);
+                            }
+                        }
+                        
                         System.out.println("Terima kasih telah menggunakan Rush Hour Puzzle Solver!");
                     } else {
                         // jika ya, tanya apakah ingin menggunakan testcase yang sama
@@ -185,6 +188,7 @@ public class Main {
                     }
                 }
             }
+            // close scanner hanya di akhir program
         }
         System.out.println("Program selesai.");
     }
