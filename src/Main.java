@@ -35,7 +35,6 @@ public class Main {
                             
                             if (filePath.equalsIgnoreCase("exit")) {
                                 System.out.println("Program dihentikan oleh user.");
-                                // JANGAN close scanner di sini!
                                 scanner.close();
                                 return;
                             }
