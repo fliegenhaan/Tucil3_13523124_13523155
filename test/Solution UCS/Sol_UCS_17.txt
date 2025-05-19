@@ -1,0 +1,151 @@
+=== RUSH HOUR PUZZLE SOLUTION ===
+Algoritma: Uniform Cost Search
+Jumlah node yang dikunjungi: 192
+Waktu eksekusi algoritma: 4 ms
+Total waktu program: 4 ms
+Jumlah langkah: 17
+
+Papan Awal
+AAB.CC
+D.BEEE
+DFPPGH
+IFJJGH
+IFLLLM
+INNOOM
+
+Gerakan 1: F-atas
+AAB.CC
+DFBEEE
+DFPPGH
+IFJJGH
+I.LLLM
+INNOOM
+
+Gerakan 2: L-kiri
+AAB.CC
+DFBEEE
+DFPPGH
+IFJJGH
+ILLL.M
+INNOOM
+
+Gerakan 3: G-bawah
+AAB.CC
+DFBEEE
+DFPP.H
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 4: P-kanan
+AAB.CC
+DFBEEE
+DF.PPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 5: B-bawah
+AA..CC
+DFBEEE
+DFBPPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 6: A-kanan
+.AA.CC
+DFBEEE
+DFBPPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 7: D-atas
+DAA.CC
+DFBEEE
+.FBPPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 8: I-atas
+DAA.CC
+DFBEEE
+IFBPPH
+IFJJGH
+ILLLGM
+.NNOOM
+
+Gerakan 9: N-kiri
+DAA.CC
+DFBEEE
+IFBPPH
+IFJJGH
+ILLLGM
+NN.OOM
+
+Gerakan 10: O-kiri
+DAA.CC
+DFBEEE
+IFBPPH
+IFJJGH
+ILLLGM
+NNOO.M
+
+Gerakan 11: G-bawah
+DAA.CC
+DFBEEE
+IFBPPH
+IFJJ.H
+ILLLGM
+NNOOGM
+
+Gerakan 12: J-kanan
+DAA.CC
+DFBEEE
+IFBPPH
+IF.JJH
+ILLLGM
+NNOOGM
+
+Gerakan 13: B-bawah
+DAA.CC
+DF.EEE
+IFBPPH
+IFBJJH
+ILLLGM
+NNOOGM
+
+Gerakan 14: C-kiri
+DAACC.
+DF.EEE
+IFBPPH
+IFBJJH
+ILLLGM
+NNOOGM
+
+Gerakan 15: E-kiri
+DAACC.
+DFEEE.
+IFBPPH
+IFBJJH
+ILLLGM
+NNOOGM
+
+Gerakan 16: H-atas
+DAACC.
+DFEEEH
+IFBPPH
+IFBJJ.
+ILLLGM
+NNOOGM
+
+Gerakan 17: H-atas
+DAACCH
+DFEEEH
+IFBPP.
+IFBJJ.
+ILLLGM
+NNOOGM
+

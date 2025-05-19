@@ -1,0 +1,63 @@
+=== RUSH HOUR PUZZLE SOLUTION ===
+Algoritma: Uniform Cost Search
+Jumlah node yang dikunjungi: 1076
+Waktu eksekusi algoritma: 3 ms
+Total waktu program: 3 ms
+Jumlah langkah: 6
+
+Papan Awal
+AAB..F
+..BCDF
+GPPCDF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 1: C-atas
+AABC.F
+..BCDF
+GPP.DF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 2: I-kiri
+AABC.F
+..BCDF
+GPP.DF
+GHIII.
+GHJ...
+LLJMM.
+
+Gerakan 3: F-bawah
+AABC..
+..BCDF
+GPP.DF
+GHIIIF
+GHJ...
+LLJMM.
+
+Gerakan 4: F-bawah
+AABC..
+..BCD.
+GPP.DF
+GHIIIF
+GHJ..F
+LLJMM.
+
+Gerakan 5: F-bawah
+AABC..
+..BCD.
+GPP.D.
+GHIIIF
+GHJ..F
+LLJMMF
+
+Gerakan 6: D-atas
+AABCD.
+..BCD.
+GPP...
+GHIIIF
+GHJ..F
+LLJMMF
+

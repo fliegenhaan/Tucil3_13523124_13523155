@@ -3,8 +3,8 @@ package algorithm.heuristics;
 import entity.Board;
 
 public class CombinedHeuristic implements Heuristic {
-    private BlockingHeuristic blockingHeuristic;
-    private ManhattanHeuristic manhattanHeuristic;
+    private final BlockingHeuristic blockingHeuristic;
+    private final ManhattanHeuristic manhattanHeuristic;
     
     public CombinedHeuristic() {
         this.blockingHeuristic = new BlockingHeuristic();

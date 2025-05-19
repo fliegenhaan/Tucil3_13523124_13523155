@@ -1,0 +1,151 @@
+=== RUSH HOUR PUZZLE SOLUTION ===
+Algoritma: IDA* Search (Manhattan Distance)
+Jumlah node yang dikunjungi: 353249
+Waktu eksekusi algoritma: 709 ms
+Total waktu program: 709 ms
+Jumlah langkah: 17
+
+Papan Awal
+AAB.CC
+D.BEEE
+DFPPGH
+IFJJGH
+IFLLLM
+INNOOM
+
+Gerakan 1: C-kiri
+AABCC.
+D.BEEE
+DFPPGH
+IFJJGH
+IFLLLM
+INNOOM
+
+Gerakan 2: F-atas
+AABCC.
+DFBEEE
+DFPPGH
+IFJJGH
+I.LLLM
+INNOOM
+
+Gerakan 3: L-kiri
+AABCC.
+DFBEEE
+DFPPGH
+IFJJGH
+ILLL.M
+INNOOM
+
+Gerakan 4: G-bawah
+AABCC.
+DFBEEE
+DFPP.H
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 5: P-kanan
+AABCC.
+DFBEEE
+DF.PPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 6: B-bawah
+AA.CC.
+DFBEEE
+DFBPPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 7: A-kanan
+.AACC.
+DFBEEE
+DFBPPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 8: D-atas
+DAACC.
+DFBEEE
+.FBPPH
+IFJJGH
+ILLLGM
+INNOOM
+
+Gerakan 9: I-atas
+DAACC.
+DFBEEE
+IFBPPH
+IFJJGH
+ILLLGM
+.NNOOM
+
+Gerakan 10: N-kiri
+DAACC.
+DFBEEE
+IFBPPH
+IFJJGH
+ILLLGM
+NN.OOM
+
+Gerakan 11: O-kiri
+DAACC.
+DFBEEE
+IFBPPH
+IFJJGH
+ILLLGM
+NNOO.M
+
+Gerakan 12: G-bawah
+DAACC.
+DFBEEE
+IFBPPH
+IFJJ.H
+ILLLGM
+NNOOGM
+
+Gerakan 13: J-kanan
+DAACC.
+DFBEEE
+IFBPPH
+IF.JJH
+ILLLGM
+NNOOGM
+
+Gerakan 14: B-bawah
+DAACC.
+DF.EEE
+IFBPPH
+IFBJJH
+ILLLGM
+NNOOGM
+
+Gerakan 15: E-kiri
+DAACC.
+DFEEE.
+IFBPPH
+IFBJJH
+ILLLGM
+NNOOGM
+
+Gerakan 16: H-atas
+DAACC.
+DFEEEH
+IFBPPH
+IFBJJ.
+ILLLGM
+NNOOGM
+
+Gerakan 17: H-atas
+DAACCH
+DFEEEH
+IFBPP.
+IFBJJ.
+ILLLGM
+NNOOGM
+

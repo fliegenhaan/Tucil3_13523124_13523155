@@ -1,0 +1,327 @@
+=== RUSH HOUR PUZZLE SOLUTION ===
+Algoritma: Uniform Cost Search
+Jumlah node yang dikunjungi: 9092
+Waktu eksekusi algoritma: 17 ms
+Total waktu program: 17 ms
+Jumlah langkah: 39
+
+Papan Awal
+ABBB.C
+A.DE.C
+PPDE.C
+...F..
+...FGG
+......
+
+Gerakan 1: D-bawah
+ABBB.C
+A..E.C
+PPDE.C
+..DF..
+...FGG
+......
+
+Gerakan 2: D-bawah
+ABBB.C
+A..E.C
+PP.E.C
+..DF..
+..DFGG
+......
+
+Gerakan 3: P-kanan
+ABBB.C
+A..E.C
+.PPE.C
+..DF..
+..DFGG
+......
+
+Gerakan 4: A-bawah
+.BBB.C
+A..E.C
+APPE.C
+..DF..
+..DFGG
+......
+
+Gerakan 5: A-bawah
+.BBB.C
+...E.C
+APPE.C
+A.DF..
+..DFGG
+......
+
+Gerakan 6: A-bawah
+.BBB.C
+...E.C
+.PPE.C
+A.DF..
+A.DFGG
+......
+
+Gerakan 7: P-kiri
+.BBB.C
+...E.C
+PP.E.C
+A.DF..
+A.DFGG
+......
+
+Gerakan 8: D-atas
+.BBB.C
+...E.C
+PPDE.C
+A.DF..
+A..FGG
+......
+
+Gerakan 9: B-kiri
+BBB..C
+...E.C
+PPDE.C
+A.DF..
+A..FGG
+......
+
+Gerakan 10: E-atas
+BBBE.C
+...E.C
+PPD..C
+A.DF..
+A..FGG
+......
+
+Gerakan 11: F-atas
+BBBE.C
+...E.C
+PPDF.C
+A.DF..
+A...GG
+......
+
+Gerakan 12: G-kiri
+BBBE.C
+...E.C
+PPDF.C
+A.DF..
+A..GG.
+......
+
+Gerakan 13: G-kiri
+BBBE.C
+...E.C
+PPDF.C
+A.DF..
+A.GG..
+......
+
+Gerakan 14: G-kiri
+BBBE.C
+...E.C
+PPDF.C
+A.DF..
+AGG...
+......
+
+Gerakan 15: F-bawah
+BBBE.C
+...E.C
+PPD..C
+A.DF..
+AGGF..
+......
+
+Gerakan 16: E-bawah
+BBB..C
+...E.C
+PPDE.C
+A.DF..
+AGGF..
+......
+
+Gerakan 17: B-kanan
+.BBB.C
+...E.C
+PPDE.C
+A.DF..
+AGGF..
+......
+
+Gerakan 18: C-bawah
+.BBB..
+...E.C
+PPDE.C
+A.DF.C
+AGGF..
+......
+
+Gerakan 19: B-kanan
+..BBB.
+...E.C
+PPDE.C
+A.DF.C
+AGGF..
+......
+
+Gerakan 20: B-kanan
+...BBB
+...E.C
+PPDE.C
+A.DF.C
+AGGF..
+......
+
+Gerakan 21: D-atas
+...BBB
+..DE.C
+PPDE.C
+A..F.C
+AGGF..
+......
+
+Gerakan 22: D-atas
+..DBBB
+..DE.C
+PP.E.C
+A..F.C
+AGGF..
+......
+
+Gerakan 23: P-kanan
+..DBBB
+..DE.C
+.PPE.C
+A..F.C
+AGGF..
+......
+
+Gerakan 24: A-atas
+..DBBB
+..DE.C
+APPE.C
+A..F.C
+.GGF..
+......
+
+Gerakan 25: A-atas
+..DBBB
+A.DE.C
+APPE.C
+...F.C
+.GGF..
+......
+
+Gerakan 26: A-atas
+A.DBBB
+A.DE.C
+.PPE.C
+...F.C
+.GGF..
+......
+
+Gerakan 27: P-kiri
+A.DBBB
+A.DE.C
+PP.E.C
+...F.C
+.GGF..
+......
+
+Gerakan 28: D-bawah
+A..BBB
+A.DE.C
+PPDE.C
+...F.C
+.GGF..
+......
+
+Gerakan 29: G-kiri
+A..BBB
+A.DE.C
+PPDE.C
+...F.C
+GG.F..
+......
+
+Gerakan 30: D-bawah
+A..BBB
+A..E.C
+PPDE.C
+..DF.C
+GG.F..
+......
+
+Gerakan 31: D-bawah
+A..BBB
+A..E.C
+PP.E.C
+..DF.C
+GGDF..
+......
+
+Gerakan 32: P-kanan
+A..BBB
+A..E.C
+.PPE.C
+..DF.C
+GGDF..
+......
+
+Gerakan 33: A-bawah
+...BBB
+A..E.C
+APPE.C
+..DF.C
+GGDF..
+......
+
+Gerakan 34: B-kiri
+..BBB.
+A..E.C
+APPE.C
+..DF.C
+GGDF..
+......
+
+Gerakan 35: B-kiri
+.BBB..
+A..E.C
+APPE.C
+..DF.C
+GGDF..
+......
+
+Gerakan 36: C-bawah
+.BBB..
+A..E..
+APPE.C
+..DF.C
+GGDF.C
+......
+
+Gerakan 37: B-kiri
+BBB...
+A..E..
+APPE.C
+..DF.C
+GGDF.C
+......
+
+Gerakan 38: E-atas
+BBBE..
+A..E..
+APP..C
+..DF.C
+GGDF.C
+......
+
+Gerakan 39: C-bawah
+BBBE..
+A..E..
+APP...
+..DF.C
+GGDF.C
+.....C
+

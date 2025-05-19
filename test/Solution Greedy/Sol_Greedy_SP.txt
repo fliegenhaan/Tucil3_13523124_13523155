@@ -1,0 +1,231 @@
+=== RUSH HOUR PUZZLE SOLUTION ===
+Algoritma: Greedy Best First Search (Blocking Vehicles)
+Jumlah node yang dikunjungi: 208
+Waktu eksekusi algoritma: 3 ms
+Total waktu program: 3 ms
+Jumlah langkah: 27
+
+Papan Awal
+AAB..F
+..BCDF
+GPPCDF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 1: C-atas
+AABC.F
+..BCDF
+GPP.DF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 2: D-atas
+AABCDF
+..BCDF
+GPP..F
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 3: P-kanan
+AABCDF
+..BCDF
+G.PP.F
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 4: P-kanan
+AABCDF
+..BCDF
+G..PPF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 5: H-atas
+AABCDF
+..BCDF
+GH.PPF
+GH.III
+G.J...
+LLJMM.
+
+Gerakan 6: J-atas
+AABCDF
+..BCDF
+GH.PPF
+GHJIII
+G.J...
+LL.MM.
+
+Gerakan 7: P-kiri
+AABCDF
+..BCDF
+GHPP.F
+GHJIII
+G.J...
+LL.MM.
+
+Gerakan 8: M-kanan
+AABCDF
+..BCDF
+GHPP.F
+GHJIII
+G.J...
+LL..MM
+
+Gerakan 9: J-bawah
+AABCDF
+..BCDF
+GHPP.F
+GH.III
+G.J...
+LLJ.MM
+
+Gerakan 10: M-kiri
+AABCDF
+..BCDF
+GHPP.F
+GH.III
+G.J...
+LLJMM.
+
+Gerakan 11: I-kiri
+AABCDF
+..BCDF
+GHPP.F
+GHIII.
+G.J...
+LLJMM.
+
+Gerakan 12: M-kanan
+AABCDF
+..BCDF
+GHPP.F
+GHIII.
+G.J...
+LLJ.MM
+
+Gerakan 13: H-atas
+AABCDF
+.HBCDF
+GHPP.F
+G.III.
+G.J...
+LLJ.MM
+
+Gerakan 14: M-kiri
+AABCDF
+.HBCDF
+GHPP.F
+G.III.
+G.J...
+LLJMM.
+
+Gerakan 15: I-kanan
+AABCDF
+.HBCDF
+GHPP.F
+G..III
+G.J...
+LLJMM.
+
+Gerakan 16: M-kanan
+AABCDF
+.HBCDF
+GHPP.F
+G..III
+G.J...
+LLJ.MM
+
+Gerakan 17: P-kanan
+AABCDF
+.HBCDF
+GH.PPF
+G..III
+G.J...
+LLJ.MM
+
+Gerakan 18: M-kiri
+AABCDF
+.HBCDF
+GH.PPF
+G..III
+G.J...
+LLJMM.
+
+Gerakan 19: I-kiri
+AABCDF
+.HBCDF
+GH.PPF
+G.III.
+G.J...
+LLJMM.
+
+Gerakan 20: I-kiri
+AABCDF
+.HBCDF
+GH.PPF
+GIII..
+G.J...
+LLJMM.
+
+Gerakan 21: M-kanan
+AABCDF
+.HBCDF
+GH.PPF
+GIII..
+G.J...
+LLJ.MM
+
+Gerakan 22: I-kanan
+AABCDF
+.HBCDF
+GH.PPF
+G.III.
+G.J...
+LLJ.MM
+
+Gerakan 23: F-bawah
+AABCD.
+.HBCDF
+GH.PPF
+G.IIIF
+G.J...
+LLJ.MM
+
+Gerakan 24: H-bawah
+AABCD.
+..BCDF
+GH.PPF
+GHIIIF
+G.J...
+LLJ.MM
+
+Gerakan 25: M-kiri
+AABCD.
+..BCDF
+GH.PPF
+GHIIIF
+G.J...
+LLJMM.
+
+Gerakan 26: F-bawah
+AABCD.
+..BCD.
+GH.PPF
+GHIIIF
+G.J..F
+LLJMM.
+
+Gerakan 27: F-bawah
+AABCD.
+..BCD.
+GH.PP.
+GHIIIF
+G.J..F
+LLJMMF
+

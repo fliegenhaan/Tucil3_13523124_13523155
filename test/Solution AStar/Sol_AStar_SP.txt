@@ -1,0 +1,63 @@
+=== RUSH HOUR PUZZLE SOLUTION ===
+Algoritma: A* Search (Blocking Vehicles)
+Jumlah node yang dikunjungi: 205
+Waktu eksekusi algoritma: 3 ms
+Total waktu program: 3 ms
+Jumlah langkah: 6
+
+Papan Awal
+AAB..F
+..BCDF
+GPPCDF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 1: C-atas
+AABC.F
+..BCDF
+GPP.DF
+GH.III
+GHJ...
+LLJMM.
+
+Gerakan 2: I-kiri
+AABC.F
+..BCDF
+GPP.DF
+GHIII.
+GHJ...
+LLJMM.
+
+Gerakan 3: D-atas
+AABCDF
+..BCDF
+GPP..F
+GHIII.
+GHJ...
+LLJMM.
+
+Gerakan 4: F-bawah
+AABCD.
+..BCDF
+GPP..F
+GHIIIF
+GHJ...
+LLJMM.
+
+Gerakan 5: F-bawah
+AABCD.
+..BCD.
+GPP..F
+GHIIIF
+GHJ..F
+LLJMM.
+
+Gerakan 6: F-bawah
+AABCD.
+..BCD.
+GPP...
+GHIIIF
+GHJ..F
+LLJMMF
+
